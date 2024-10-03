@@ -26,7 +26,115 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+  <style>
+    /* Modal (popup) styling */
+    .modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 50%;
+    top: 30%;
+    transform: translateX(-50%);
+    width: 300px;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 10px 15px;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+    height: 370px;
+}
+    /* Close button styling */
+    .close-btn {
+        float: right;
+        font-size: 16px; /* Smaller size */
+        cursor: pointer;
+        color: #333;
+        margin-top: -10px; /* Adjust positioning to make it fit better */
+        transition: color 0.3s;
+    }
 
+    .close-btn:hover {
+        color: #e74c3c; /* Change color on hover */
+    }
+
+    /* Contact form styling */
+    .contact-intro h3 {
+        font-size: 1em; /* Slightly smaller */
+        color: #2c3e50;
+        margin: 0 0 5px; /* Reduced margin */
+    }
+
+    .contact-intro p {
+        font-size: 0.85em; /* Slightly smaller */
+        color: #7f8c8d;
+        margin-bottom: 8px; /* Reduced margin */
+    }
+
+    .form-group {
+        margin-bottom: 8px; /* Reduced space between form groups */
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 5px; /* Reduced padding */
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        margin-top: 5px;
+        font-size: 0.85em; /* Slightly smaller font */
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
+    }
+
+    .form-input:focus {
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-submit {
+        width: 100%;
+        padding: 8px; /* Slightly reduced padding */
+        background-color: #ff8f50;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.95em;
+        margin-top: 5px; /* Reduced margin */
+        transition: background-color 0.3s;
+    }
+
+    .form-submit:hover {
+        background-color: #a34c1c;
+    }
+
+    /* Optional: Make the form more compact for smaller screens */
+    @media (max-width: 400px) {
+        .modal {
+            width: 90%;
+        }
+    }
+
+    /* Animation for fade-in */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+</style>
+<style>
+  /* WhatsApp Button CSS */
+  .whatsapp-button {
+      position: fixed;
+      bottom: 60px; /* Distance from the bottom */
+      right: 10px;  /* Distance from the right */
+      z-index: 100;
+      cursor: pointer;
+  }
+  .whatsapp-button img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+  }
+</style>
   <!-- =======================================================
   * Template Name: Gp
   * Template URL: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/
@@ -37,6 +145,64 @@
 </head>
 
 <body class="index-page">
+
+ 
+<!-- Contact Form Modal -->
+<div id="contactModal" class="modal">
+  <div class="modal-content">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <div class="contact-intro">
+          <h3>Stay in Touch</h3>
+          <p>We'd love to hear from you!</p>
+      </div>
+      <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" id="contactForm">
+          <input type="hidden" name="access_key" value="3311a32d-d0f5-455e-9b87-311f07452bf1" />
+          <input type="hidden" name="subject" value="New Contact Form Submission from Web3Forms" />
+          <input type="hidden" name="from_name" value="My Website" />
+
+          <div class="form-group">
+              <label for="name" class="form-label">Name</label>
+              <input id="name" name="name" class="form-input" placeholder="Your name" type="text" required />
+          </div>
+          <div class="form-group">
+              <label for="email" class="form-label">Email</label>
+              <input id="email" name="email" class="form-input" placeholder="Your email" type="email" required />
+          </div>
+          <button class="form-submit" type="submit">Send Message</button>
+      </form>
+  </div>
+</div>
+
+<script>
+  // Show the modal after 5 seconds
+  window.onload = function() {
+      setTimeout(function() {
+          document.getElementById('contactModal').style.display = 'block';
+      }, 20000); // 5 seconds delay
+  };
+
+  // Close the modal
+  document.getElementById('closeModal').onclick = function() {
+      document.getElementById('contactModal').style.display = 'none';
+  };
+
+  // Close modal if clicking outside the modal content (optional)
+  window.onclick = function(event) {
+      const modal = document.getElementById('contactModal');
+      if (event.target === modal) {
+          modal.style.display = 'none';
+      }
+  };
+
+  // Form validation with basic HTML5 validation
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', function(event) {
+      if (!form.checkValidity()) {
+          event.preventDefault(); // Prevent submission if invalid
+          alert('Please fill out the form correctly.');
+      }
+  });
+</script>
 
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
@@ -55,35 +221,21 @@
           <li><a href="#services">Services</a></li>
           <li><a href="#portfolio">Portfolio</a></li>
           <li><a href="#team">Team</a></li>
-          <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="#">Dropdown 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">Deep Dropdown 1</a></li>
-                  <li><a href="#">Deep Dropdown 2</a></li>
-                  <li><a href="#">Deep Dropdown 3</a></li>
-                  <li><a href="#">Deep Dropdown 4</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Dropdown 2</a></li>
-              <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li>
-            </ul>
-          </li>
+         
           <li><a href="#contact">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="index.html#about">Get Started</a>
+      <a class="btn-getstarted" href="index.html#contact">Get Started</a>
 
     </div>
   </header>
 
   <main class="main">
-
+    <a href="https://wa.me/+919872567925" class="whatsapp-button" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp">
+  </a>
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
 
@@ -820,38 +972,45 @@
             </div><!-- End Info Item -->
 
           </div>
-
-          <div class="col-lg-8">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-              <div class="row gy-4">
-
-                <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+          
+           <!-- Contact Form Modal -->
+           <section class="contact-section">
+            <div class="contact-intro">
+              <h2 class="contact-title">Get in Touch</h2>
+              <p class="contact-description">
+                Fill out the form below and we'll get back to you as soon as possible.
+              </p>
+            </div>
+          
+            <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+          
+              <input type="hidden" name="access_key" value="3311a32d-d0f5-455e-9b87-311f07452bf1" />
+              <input type="hidden" name="subject" value="New Contact Form Submission from Web3Forms" />
+              <input type="hidden" name="from_name" value="My Website" />
+              <!-- More custom ization options available in the docs: https://docs.web3forms.com -->
+          
+              <div class="form-group-container">
+                <div class="form-group">
+                  <label for="name" class="form-label">Name</label>
+                  <input id="name" name="name" class="form-input" placeholder="Your name" type="text" />
                 </div>
-
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                <div class="form-group">
+                  <label for="email" class="form-label">Email</label>
+                  <input id="email" name="email" class="form-input" placeholder="Your email" type="email" />
                 </div>
-
-                <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                <div class="form-group">
+                  <label for="phone" class="form-label">Phone</label>
+                  <input id="phone" name="phone" class="form-input" placeholder="+1 (234) 56789" type="text" />
                 </div>
-
-                <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                <div class="form-group">
+                  <label for="message" class="form-label">Message</label>
+                  <textarea class="form-textarea" id="message" name="message" placeholder="Your message"></textarea>
                 </div>
-
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit">Send Message</button>
-                </div>
-
               </div>
+              <button class="form-submit" type="submit">Send Message</button>
             </form>
-          </div><!-- End Contact Form -->
+          
+          </section>
 
         </div>
 
@@ -868,7 +1027,7 @@
         <div class="row gy-4">
           <div class="col-lg-4 col-md-6 footer-about">
             <a href="index.html" class="logo d-flex align-items-center">
-              <span class="sitename">GP</span>
+              <span class="sitename"> <img src="assets/img/11.png" alt=""></span>
             </a>
             <div class="footer-contact pt-3">
               <p>A108 Adam Street</p>

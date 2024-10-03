@@ -158,8 +158,8 @@ h6 {
 }
 
 .header .logo img {
-  max-height: 56px;
-  margin-right: 8px;
+  max-height: 66px;
+  margin-right: 5px;
 }
 
 .header .logo h1 {
@@ -1715,4 +1715,136 @@ section,
 --------------------------------------------------------------*/
 .starter-section {
   /* Add your styles here */
+}.contact-section {
+  width: 100%;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3rem 1rem;
+}
+
+.contact-intro > * + * {
+  margin-top: 1rem;
+}
+
+.contact-title {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+}
+
+.contact-description {
+  color: rgb(107 114 128);
+}
+
+.form-group-container {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  margin-bottom: 0.5rem;
+}
+
+.form-input,
+.form-textarea {
+  padding: 0.5rem;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  height: 2.5rem;
+  width: 100%;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.form-input::placeholder,
+.form-textarea:focus-visible {
+  color: #6b7280;
+}
+
+.form-input:focus-visible,
+.form-textarea:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.form-textarea {
+  min-height: 120px;
+}
+
+.form-submit {
+  width: 100%;
+  margin-top: 1.2rem;
+  background-color:#ff9048;
+  color: #fff;
+  padding: 13px 5px;
+  border-radius: 0.375rem;
+}
+
+
+
+
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: left;
+}
+
+.close-btn {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.form-group-container {
+  margin-bottom: 15px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-submit {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-submit:hover {
+  background-color: #218838;
 }
