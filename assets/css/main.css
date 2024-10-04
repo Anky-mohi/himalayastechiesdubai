@@ -1230,7 +1230,11 @@ section,
   line-height: 0;
   margin-right: 15px;
 }
-
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
 .stats .stats-item .purecounter {
   color: var(--heading-color);
   font-size: 40px;
